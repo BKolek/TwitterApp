@@ -1,0 +1,28 @@
+*.iml
+*.iws
+*.log
+*.idea/
+
+# IDE specific folders
+.idea/
+.vscode/
+
+# Compiled source
+*.class
+*.war
+*.jar
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Output directories
+out/
+target/
+
+# Build system files
+.gradle/
+build/
