@@ -11,8 +11,12 @@ object App {
 
     val loader = new Load(spark)
     val cleaner = new Clean(spark)
-    val clean: Dataset[Row] = cleaner.cleanTweets(loader.loadAllTweets)
-    clean.show(truncate = false)
-    clean.printSchema()
+    val cleanDF: Dataset[Row] = cleaner.cleanTweets(loader.loadAllTweets)
+    val analyze = new Analyzer(spark)
+    val searcher = new Search(spark)
+
+    val words = searcher.searchByKeywords(Seq("Trump"))(cleanDF)
+    val analyzed = analyze.calculateAvgFollowPerLocation(words)
+    analyzed.orderBy(col("count").desc).show(truncate = false)
   }
 }
