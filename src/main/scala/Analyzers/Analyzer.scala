@@ -1,8 +1,10 @@
-import org.apache.spark.sql.functions.{avg, col, desc, explode, explode_outer}
+package Analyzers
+
+import org.apache.spark.sql.functions.{avg, col, desc}
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
 
 class Analyzer(spark: SparkSession) {
-  import ColumnNames._
+  import ColumnNames.ColumnNames._
 
   def calculateAvgFollowPerLocation(df: Dataset[Row]): Dataset[Row] = {
 

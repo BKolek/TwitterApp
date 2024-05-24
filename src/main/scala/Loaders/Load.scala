@@ -1,7 +1,6 @@
-import Load.FINANCE_LABEL
-import org.apache.spark
+package Loaders
+
 import org.apache.spark.sql.functions.lit
-import org.apache.spark.sql.{Dataset, Row}
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
 object Load{
   val COVID_LABEL: String = "covid"

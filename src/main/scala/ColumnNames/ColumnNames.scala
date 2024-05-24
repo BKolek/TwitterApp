@@ -1,3 +1,5 @@
+package ColumnNames
+
 object ColumnNames {
   val USER_NAME: String = "user_name"
   val USER_FOLLOWERS: String = "user_followers"

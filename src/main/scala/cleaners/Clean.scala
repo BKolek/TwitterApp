@@ -1,12 +1,14 @@
-import org.apache.spark.sql.{SparkSession, Dataset, Row}
+package cleaners
+
+
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
+import org.apache.spark.sql.{Dataset, Row, SparkSession}
 
 
 
 class Clean(spark: SparkSession) {
-  import ColumnNames._
-
+  import ColumnNames.ColumnNames._
   val removeFirstLastUDF = udf((s: String) => s.slice(1, s.length - 1))
 
 

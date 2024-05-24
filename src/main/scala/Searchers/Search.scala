@@ -1,8 +1,10 @@
-import org.apache.spark.sql.functions.{col, desc}
+package Searchers
+
+import org.apache.spark.sql.functions.col
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
 
 class Search(spark: SparkSession) {
-  import ColumnNames._
+  import ColumnNames.ColumnNames._
   def searchByKeyWord(kw: String)(df: Dataset[Row]) = {
 
 

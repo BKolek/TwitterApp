@@ -1,8 +1,12 @@
+import Analyzers.Analyzer
+import Loaders.Load
+import Searchers.Search
+import cleaners.Clean
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
 
 object App {
-  import ColumnNames._
+  import ColumnNames.ColumnNames._
   def main(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession.builder()
       .appName(name = "income")
