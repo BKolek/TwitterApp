@@ -9,7 +9,7 @@ object App {
   import ColumnNames.ColumnNames._
   def main(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession.builder()
-      .appName(name = "income")
+      .appName(name = "twitterApp")
       .master(master = "local")
       .getOrCreate()
 
