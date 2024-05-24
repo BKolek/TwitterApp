@@ -1,6 +1,7 @@
 package cleaners
 
 
+import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
@@ -9,7 +10,8 @@ import org.apache.spark.sql.{Dataset, Row, SparkSession}
 
 class Clean(spark: SparkSession) {
   import ColumnNames.ColumnNames._
-  val removeFirstLastUDF = udf((s: String) => s.slice(1, s.length - 1))
+
+  val removeFirstLastUDF: UserDefinedFunction = udf((s: String) => s.slice(1, s.length - 1))
 
 
   def cleanTweets(df: Dataset[Row]): Dataset[Row] = {
