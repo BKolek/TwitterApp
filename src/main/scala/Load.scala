@@ -1,21 +1,26 @@
+import Load.FINANCE_LABEL
 import org.apache.spark
 import org.apache.spark.sql.functions.lit
 import org.apache.spark.sql.{Dataset, Row}
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
-
+object Load{
+  val COVID_LABEL: String = "covid"
+  val GRAMMY_LABEL: String = "grammy"
+  val FINANCE_LABEL: String = "finance"
+}
 class Load(spark: SparkSession) {
   def loadFin: Dataset[Row]={
     spark.read
       .option("header", "true")
       .csv(path = "finance.csv")
-      .withColumn(colName = "category", lit("finance"))
+      .withColumn(colName = "category", lit(Load.FINANCE_LABEL))
       .na.drop()
   }
   def loadGrammy: Dataset[Row] ={
     spark.read
       .option("header", "true")
       .csv(path="grammy.csv")
-      .withColumn(colName = "category", lit("grammy"))
+      .withColumn(colName = "category", lit(Load.GRAMMY_LABEL))
       .na.drop()
 
   }
@@ -23,7 +28,7 @@ class Load(spark: SparkSession) {
     spark.read
       .option("header", "true")
       .csv(path = "covid.csv")
-      .withColumn(colName = "category", lit("covid"))
+      .withColumn(colName = "category", lit(Load.COVID_LABEL))
       .na.drop()
   }
   def loadAllTweets: Dataset[Row] ={

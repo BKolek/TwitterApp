@@ -2,22 +2,23 @@ import org.apache.spark.sql.{SparkSession, Dataset, Row}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 
+
+
 class Clean(spark: SparkSession) {
-  // Define the UDF to remove the first and last characters
+  import ColumnNames._
+
   val removeFirstLastUDF = udf((s: String) => s.slice(1, s.length - 1))
 
-  // Method to clean tweets DataFrame
-  def cleanTweets(df: Dataset[Row]): Dataset[Row] = {
-    df.withColumn("date", col("date").cast(DateType))
-      .withColumn("user_created", col("user_created").cast(DateType))
-      .withColumn("user_favourites", col("user_favourites").cast(LongType))
-      .withColumn("user_friends", col("user_friends").cast(LongType))
-      .withColumn("user_followers", col("user_followers").cast(LongType))
-      .withColumn("user_verified", col("user_verified").cast(BooleanType))
-      .withColumn("hashtags", removeFirstLastUDF(col("hashtags")))
-      .withColumn("hashtags", split(col("hashtags"), ", "))
-      .withColumn("hashtags", expr("transform(hashtags, x -> substring(x, 2, length(x) - 2))"))
 
+  def cleanTweets(df: Dataset[Row]): Dataset[Row] = {
+    df.withColumn(DATE, col(DATE).cast(DateType))
+      .withColumn(USER_CREATED, col(USER_CREATED).cast(DateType))
+      .withColumn(USER_FAVOURITES, col(USER_FAVOURITES).cast(LongType))
+      .withColumn(USER_FRIENDS, col(USER_FRIENDS).cast(LongType))
+      .withColumn(USER_FOLLOWERS, col(USER_FOLLOWERS).cast(LongType))
+      .withColumn(USER_VERIFIED, col(USER_VERIFIED).cast(BooleanType))
+      .withColumn(HASHTAGS, removeFirstLastUDF(col(HASHTAGS)))
+      .withColumn(HASHTAGS, split(col(HASHTAGS), ", "))
+      .withColumn(HASHTAGS, expr("transform(hashtags, x -> substring(x, 2, length(x) - 2))"))
   }
 }
-
