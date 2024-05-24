@@ -11,14 +11,14 @@ class Load(spark: SparkSession) {
   def loadFin: Dataset[Row]={
     spark.read
       .option("header", "true")
-      .csv(path = "finance.csv")
+      .csv(path = "src/main/resources/finance.csv")
       .withColumn(colName = "category", lit(Load.FINANCE_LABEL))
       .na.drop()
   }
   def loadGrammy: Dataset[Row] ={
     spark.read
       .option("header", "true")
-      .csv(path="grammy.csv")
+      .csv(path="src/main/resources/grammy.csv")
       .withColumn(colName = "category", lit(Load.GRAMMY_LABEL))
       .na.drop()
 
@@ -26,7 +26,7 @@ class Load(spark: SparkSession) {
   def loadCovid: Dataset[Row] ={
     spark.read
       .option("header", "true")
-      .csv(path = "covid.csv")
+      .csv(path = "src/main/resources/covid.csv")
       .withColumn(colName = "category", lit(Load.COVID_LABEL))
       .na.drop()
   }
