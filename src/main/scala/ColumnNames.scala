@@ -11,4 +11,5 @@ object ColumnNames {
   val COUNT: String = "count"
   val AVERAGE_FOLLOWERS: String = "average_followers"
   val TEXT = "text"
+  val IS_RETWEET = "is_retweet"
 }

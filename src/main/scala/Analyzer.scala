@@ -2,8 +2,9 @@ import org.apache.spark.sql.functions.{avg, col, desc, explode, explode_outer}
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
 
 class Analyzer(spark: SparkSession) {
+  import ColumnNames._
+
   def calculateAvgFollowPerLocation(df: Dataset[Row]): Dataset[Row] = {
-    import ColumnNames._
 
     df.select(USER_NAME, USER_FOLLOWERS, USER_LOCATION)
       .filter(col(USER_NAME).isNotNull)
@@ -15,8 +16,8 @@ class Analyzer(spark: SparkSession) {
       .withColumnRenamed(AVERAGE_FOLLOWERS, COUNT)
   }
   def calculateByRetweets(df: Dataset[Row]): Dataset[Row] = {
-    df.groupBy("is_retweet").count()
-      .orderBy(desc("count"))
+    df.groupBy(IS_RETWEET).count()
+      .orderBy(desc(COUNT))
   }
 
 }
