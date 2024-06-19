@@ -4,7 +4,7 @@ import Searchers.Search
 import cleaners.Clean
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
-
+import Saver.Save
 object App {
   import ColumnNames.ColumnNames._
   def main(args: Array[String]): Unit = {
@@ -22,5 +22,7 @@ object App {
     val words: Dataset[Row] = searcher.searchByKeywords(Seq("Trump"))(cleanDF)
     val analyzed: Dataset[Row] = analyze.calculateAvgFollowPerLocation(words)
     analyzed.orderBy(col(COUNT).desc).show(truncate = false)
+    val save = new Save(spark)
+    save.saveToDb(words)
   }
 }

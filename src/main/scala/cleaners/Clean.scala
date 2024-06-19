@@ -21,7 +21,7 @@ class Clean(spark: SparkSession) {
       .withColumn(USER_FRIENDS, col(USER_FRIENDS).cast(LongType))
       .withColumn(USER_FOLLOWERS, col(USER_FOLLOWERS).cast(LongType))
       .withColumn(USER_VERIFIED, col(USER_VERIFIED).cast(BooleanType))
-      .withColumn(HASHTAGS, removeFirstLastUDF(col(HASHTAGS)))
+      //.withColumn(HASHTAGS, removeFirstLastUDF(col(HASHTAGS)))
       .withColumn(HASHTAGS, split(col(HASHTAGS), ", "))
       .withColumn(HASHTAGS, expr("transform(hashtags, x -> substring(x, 2, length(x) - 2))"))
   }
